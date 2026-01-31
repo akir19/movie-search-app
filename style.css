@@ -64,3 +64,28 @@ body {
     .burger-btn { display: none; } /* Прячем бургер */
     .nav-links { display: flex; gap: 20px; } /* Показываем меню */
 }
+
+/* Базовый стиль для мобилок (маленький заголовок) */
+.logo {
+    font-size: 1.2rem; /* Примерно как h3 */
+    margin: 0;
+    transition: font-size 0.3s ease;
+}
+
+/* Для планшетов и десктопов (большой заголовок) */
+@media (min-width: 768px) {
+    .logo {
+        font-size: 2.5rem; /* Полноценный h1 */
+    }
+}
+
+/* Анимация крестика при добавлении класса .active */
+.burger-btn.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.burger-btn.active span:nth-child(2) {
+  opacity: 0; /* Скрываем среднюю полосу */
+}
+.burger-btn.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}

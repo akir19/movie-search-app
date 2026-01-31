@@ -54,11 +54,25 @@ themeBtn.addEventListener('click', () => {
     document.body.classList.toggle('dark-theme');
 });
 
+// Переключатель языка
+const langBtn = document.querySelector('#lang-toggle');
+langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'ru' ? 'en' : 'ru';
+    updateInterface();
+});
+
 // 4. Логика поиска (пока просто в консоль)
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log("Ищем:", searchInput.value);
 });
+
+// превращает бургер в крестик принажатии
+document.getElementById('burger-btn').addEventListener('click', function() {
+  this.classList.toggle('active');
+});
+
+
 
 // Запускаем отрисовку при загрузке
 displayMovies(testMovies);
