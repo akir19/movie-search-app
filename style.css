@@ -1,0 +1,66 @@
+:root {
+    --bg-color: #f4f4f9;
+    --card-bg: #ffffff;
+    --text-color: #222;
+    --accent-color: #ff4757;
+}
+
+body.dark-theme {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    transition: 0.3s;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+.header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+.search-form { display: flex; gap: 10px; margin-bottom: 30px; }
+.search-form input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #ccc; }
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+.movie-card:hover { transform: translateY(-5px); }
+.movie-card img { width: 100%; height: auto; display: block; }
+.movie-card h3 { padding: 10px; font-size: 1rem; margin: 0; }
+
+
+/* База для мобилки */
+.burger-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none; border: none; cursor: pointer;
+}
+.burger-btn span {
+    width: 25px; height: 3px; background-color: var(--text-color);
+    transition: 0.3s;
+}
+
+/* Скрываем элементы на мобилке, если нужно */
+.nav-links { display: none; } 
+
+/* Планшеты и Десктоп */
+@media (min-width: 768px) {
+    .burger-btn { display: none; } /* Прячем бургер */
+    .nav-links { display: flex; gap: 20px; } /* Показываем меню */
+}

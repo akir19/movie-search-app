@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MellowMovies — Поиск фильмов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme"> 
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <button class="burger-btn" id="burger-btn">
+                    <span></span><span></span><span></span>
+                </button>
+                <h1 class="logo">MellowMovies</h1>
+                <div class="controls">
+                    <button id="theme-toggle" class="btn-icon">🌓</button>
+                    <button id="lang-toggle" class="btn-lang">EN</button>
+                </div>
+            </div>
+            
+            <form class="search-form">
+                <input type="text" id="search-input" placeholder="Какой фильм ищем?">
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="movies-grid" class="movies-grid">
+            </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
