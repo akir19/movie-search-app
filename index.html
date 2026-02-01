@@ -8,7 +8,7 @@
 </head>
 <body class="light-theme"> 
     <header class="header">
-        <div class="container">
+        <div class="container sticky-wrapper">
             <div class="header-top">
                 <button class="burger-btn" id="burger-btn">
                     <span></span><span></span><span></span>
@@ -24,12 +24,19 @@
                 <input type="text" id="search-input" placeholder="Какой фильм ищем?">
                 <button type="submit">Найти</button>
             </form>
+
+            <div class="pagination">
+                <button id="prev-page" class="btn-page">←</button>
+                <div id="page-numbers">
+                    <span id="current-page-num">1</span> / <span id="total-pages-num">1</span>
+                </div>
+                <button id="next-page" class="btn-page">→</button>
+            </div>
         </div>
     </header>
 
     <main class="container">
-        <div id="movies-grid" class="movies-grid">
-            </div>
+        <div id="movies-grid" class="movies-grid"></div>
     </main>
 
     <script type="module" src="main.js"></script>

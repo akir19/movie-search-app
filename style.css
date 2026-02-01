@@ -2,13 +2,14 @@
     --bg-color: #f4f4f9;
     --card-bg: #ffffff;
     --text-color: #222;
-    --accent-color: #ff4757;
+    --header-bg: rgba(255, 255, 255, 0.95);
 }
 
 body.dark-theme {
     --bg-color: #121212;
     --card-bg: #1e1e1e;
     --text-color: #ffffff;
+    --header-bg: rgba(18, 18, 18, 0.95);
 }
 
 body {
@@ -19,17 +20,40 @@ body {
     transition: 0.3s;
 }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 10px 20px; }
 
-.header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+/* Sticky Header */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--header-bg);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
 
-.search-form { display: flex; gap: 10px; margin-bottom: 30px; }
-.search-form input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #ccc; }
+.header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.logo { font-size: 1.2rem; margin: 0; }
+@media (min-width: 768px) { .logo { font-size: 2rem; } }
 
+.search-form { display: flex; gap: 10px; margin-bottom: 10px; }
+.search-form input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; background: var(--card-bg); color: var(--text-color); }
+
+/* Pagination Styles */
+.pagination { display: flex; justify-content: center; align-items: center; gap: 15px; padding-bottom: 10px; }
+.btn-page { background: #f1c40f; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+.btn-page:disabled { background: #ccc; cursor: not-allowed; }
+
+/* Grid: 2 columns on mobile, auto-fill on desktop */
 .movies-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .movies-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
 }
 
 .movie-card {
@@ -37,55 +61,10 @@ body {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
 }
-.movie-card:hover { transform: translateY(-5px); }
-.movie-card img { width: 100%; height: auto; display: block; }
-.movie-card h3 { padding: 10px; font-size: 1rem; margin: 0; }
+.movie-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+.movie-card h3 { padding: 10px; font-size: 0.9rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-
-/* База для мобилки */
-.burger-btn {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: none; border: none; cursor: pointer;
-}
-.burger-btn span {
-    width: 25px; height: 3px; background-color: var(--text-color);
-    transition: 0.3s;
-}
-
-/* Скрываем элементы на мобилке, если нужно */
-.nav-links { display: none; } 
-
-/* Планшеты и Десктоп */
-@media (min-width: 768px) {
-    .burger-btn { display: none; } /* Прячем бургер */
-    .nav-links { display: flex; gap: 20px; } /* Показываем меню */
-}
-
-/* Базовый стиль для мобилок (маленький заголовок) */
-.logo {
-    font-size: 1.2rem; /* Примерно как h3 */
-    margin: 0;
-    transition: font-size 0.3s ease;
-}
-
-/* Для планшетов и десктопов (большой заголовок) */
-@media (min-width: 768px) {
-    .logo {
-        font-size: 2.5rem; /* Полноценный h1 */
-    }
-}
-
-/* Анимация крестика при добавлении класса .active */
-.burger-btn.active span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-.burger-btn.active span:nth-child(2) {
-  opacity: 0; /* Скрываем среднюю полосу */
-}
-.burger-btn.active span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
+/* Burger */
+.burger-btn { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+.burger-btn span { width: 25px; height: 3px; background-color: var(--text-color); }
