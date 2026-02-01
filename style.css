@@ -3,6 +3,7 @@
     --card-bg: #ffffff;
     --text-color: #222;
     --header-bg: rgba(255, 255, 255, 0.95);
+    --accent-color: #f1c40f;
 }
 
 body.dark-theme {
@@ -22,49 +23,130 @@ body {
 
 .container { max-width: 1200px; margin: 0 auto; padding: 10px 20px; }
 
-/* Sticky Header */
+/* Overlay: Слой затемнения */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1500; /* Ниже меню и хедера */
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Header */
 .header {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 2500; /* Самый высокий */
     background-color: var(--header-bg);
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    backdrop-filter: blur(5px);    
 }
+
+.sticky-wrapper { position: relative; }
 
 .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .logo { font-size: 1.2rem; margin: 0; }
 @media (min-width: 768px) { .logo { font-size: 2rem; } }
 
+/* Бургер */
+.burger-btn {
+    width: 28px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 3001; /* Выше всех */
+    position: relative;
+}
+
+.burger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 3px;
+    transition: 0.3s;
+    transform-origin: center;
+}
+
+.burger-btn.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.burger-btn.active span:nth-child(2) { opacity: 0; }
+.burger-btn.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* Боковое меню */
+.side-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 100%);
+    background-color: var(--card-bg);
+    z-index: 2000;
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s ease;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    overflow-y: auto;
+}
+
+.side-menu.open {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Элементы внутри меню */
+.genres-list { display: flex; flex-direction: column; padding: 20px; gap: 5px; }
+
+.genre-btn, .info-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    padding: 12px 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1.1rem;
+    transition: 0.2s;
+}
+
+.genre-btn:hover { background: var(--accent-color); color: #000; padding-left: 20px; }
+
+.menu-divider { border: 0; border-top: 1px solid rgba(128,128,128,0.2); margin: 10px 0; }
+
+.info-btn { opacity: 0.6; font-size: 0.9rem; }
+.info-btn:hover { opacity: 1; color: var(--accent-color); }
+
+/* Остальные стили */
 .search-form { display: flex; gap: 10px; margin-bottom: 10px; }
 .search-form input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; background: var(--card-bg); color: var(--text-color); }
 
-/* Pagination Styles */
 .pagination { display: flex; justify-content: center; align-items: center; gap: 15px; padding-bottom: 10px; }
-.btn-page { background: #f1c40f; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-.btn-page:disabled { background: #ccc; cursor: not-allowed; }
+.btn-page { background: var(--accent-color); border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
-/* Grid: 2 columns on mobile, auto-fill on desktop */
 .movies-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin-top: 20px;
 }
-
 @media (min-width: 768px) {
-    .movies-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+    .movies-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
 }
 
-.movie-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
+.movie-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
+.movie-card:hover { transform: translateY(-5px); }
 .movie-card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
-.movie-card h3 { padding: 10px; font-size: 0.9rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-/* Burger */
-.burger-btn { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
-.burger-btn span { width: 25px; height: 3px; background-color: var(--text-color); }
+.movie-card h3 { padding: 10px; font-size: 0.9rem; margin: 0; }

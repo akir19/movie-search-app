@@ -7,8 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="light-theme"> 
+    
+    <div class="overlay" id="overlay"></div>
+    
     <header class="header">
         <div class="container sticky-wrapper">
+            <div class="side-menu" id="side-menu">
+                <nav class="genres-list">
+                    <button class="genre-btn" data-id="28">Боевики</button>
+                    <button class="genre-btn" data-id="35">Комедии</button>
+                    <button class="genre-btn" data-id="18">Драмы</button>
+                    <button class="genre-btn" data-id="27">Ужасы</button>
+                    <button class="genre-btn" data-id="">Все жанры</button>
+                    
+                    <hr class="menu-divider">
+                    
+                    <div class="extra-menu-items">
+                        <button class="info-btn" id="about-btn">О программе...</button>
+                    </div>
+                </nav>
+            </div>
+
             <div class="header-top">
                 <button class="burger-btn" id="burger-btn">
                     <span></span><span></span><span></span>
@@ -32,7 +51,7 @@
                 </div>
                 <button id="next-page" class="btn-page">→</button>
             </div>
-        </div>
+        </div>        
     </header>
 
     <main class="container">
